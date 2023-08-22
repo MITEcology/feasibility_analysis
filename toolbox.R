@@ -9,7 +9,6 @@ if (!require(uniformly)) {install.packages("uniformly"); library(uniformly)}
 if (!require(furrr)) {install.packages("furrr"); library(furrr)}
 if (!require(pracma)) {install.packages("pracma"); library(pracma)}
 if (!require(combinat)) {install.packages("combinat"); library(combinat)}
-if (!require(readxl)) {install.packages("readxl"); library(readxl)}
 if (!require(deSolve)) {install.packages("deSolve"); library(deSolve)}
 
 # generate random interaction matrix
@@ -57,13 +56,46 @@ generate_inte_frac <- function(S, sigma, frac, mu = 0, dist = "halfnorm") {
   return(matA)
 }
 
+check_negative_definite <- function(A){
+  all(eigen(A+t(A))$values < 0)
+}
+# generate negative definite random interaction matrix
+# input:
+  # S: number of species
+  # sigma: standard deviation of interaction strength
+  # conne: connectivity of interaction matrix
+  # mu: mean of interaction strength
+  # dist: distribution of interaction strength
+# output: an S times S interaction matrix
+generate_inte_neg_def <- function(S, sigma, conne = 1, dist = "norm", mu = -0.1*sigma, trail = 0) {
+  if (dist == "norm") {
+    matA <- rnorm(S * S, mean = mu, sd = sigma)
+  } else if (dist == "lnorm") {
+    matA <- -rlnorm(S * S, mean = mu, sd = sigma)
+  }
+  zeroes <- sample(
+    c(rep.int(1, floor(S * S * conne)), rep.int(0, (S * S - floor(S * S * conne))))
+  )
+  matA[which(zeroes == 0)] <- 0
+  matA <- matrix(matA, ncol = S, nrow = S)
+  diag(matA) <- -1
+  if(check_negative_definite(matA)) {
+    return(matA)
+  } else if (trail < 100) {
+    trail <- trail + 1
+    generate_inte_neg_def(S, sigma, conne, mu, dist, trail)
+  } else {
+    stop("Error: cannot generate negative definite matrix within 100 trails")
+  }
+}
+
 # calculate the feasibility of a community
 # input:
   # A: interaction matrix
   # nt: number of trails
   # raw: TRUE for community-level; FALSE for species-level
 # equivalent to calculate_omega(A, method = "sphere")
-calculate_feas_commun <- function(A, nt = 30, raw = TRUE) {
+feasibility_community <- function(A, nt = 30, raw = TRUE) {
   S <- nrow(A)
   omega <- function(S, Sigma) {
     m <- matrix(0, S, 1)
@@ -88,8 +120,9 @@ calculate_feas_commun <- function(A, nt = 30, raw = TRUE) {
 # input:
   # A: interaction matrix of community 1
   # B: interaction matrix of community 2 (the same dimension as A)
+  # nsamples: number of sampling points
   # nt: number of trails
-calculate_feas_overlap <- function(A, B, raw = TRUE, nsamples = 100) {
+feasibility_overlap <- function(A, B, raw = TRUE, nsamples = 3000, nt = 10) {
   num <- nrow(A)
 
   overlap_vertex <- vertex_detection(A, B) %>%
@@ -101,7 +134,7 @@ calculate_feas_overlap <- function(A, B, raw = TRUE, nsamples = 100) {
   } else {
     volume_overlap <- tryCatch(
       {
-        calculate_omega(overlap_vertex, raw, nsamples)
+        replicate(nt, calculate_omega(overlap_vertex, raw, nsamples)) %>% mean()
       },
       error = function(cond) {
         0
@@ -114,12 +147,9 @@ calculate_feas_overlap <- function(A, B, raw = TRUE, nsamples = 100) {
 # calculate the asymmetry of the feasibility domain of a community
 # input:
   # A: interaction matrix
-calculate_asymmetry <- function(matA) {
+feasibility_asymmetry <- function(matA) {
   # standard deviation of all column lengths
-  norm2 <- function(vec){
-    sqrt(sum(vec^2))
-  }
-  sd(apply(matA, 2, norm2))
+  sd(apply(matA, 2, function(x) sqrt(sum(x^2))))
 }
 
 # calculate the feasibility partition of all possible compositions
@@ -127,16 +157,15 @@ calculate_asymmetry <- function(matA) {
   # matA: interaction matrix
   # nt: number of trails
 # output: a vector of feasibility values for all possible compositions
-calculate_feas_partition <- function(matA, nt = 30) {
-
+feasibility_partition <- function(matA, nt = 30) {
   # function that partitions the parameter space from a given interaction matrix
-  # params: in_mat = interaction matrix (representing LV dynamics)
+  # params: inte = interaction matrix (representing LV dynamics)
   # return: a list of all possible regions (as matrices)
-  get_region <- function(in_mat) {
-    num <- ncol(in_mat)
+  get_region <- function(inte) {
+    num <- ncol(inte)
     l <- 0
-    A <- in_mat
-    B <- eye(nrow(in_mat), ncol(in_mat))
+    A <- inte
+    B <- eye(nrow(inte), ncol(inte))
     record0 <- get_compo(num, 0)
     region <- list()
     for (l in 1 : 2^num){
@@ -146,7 +175,7 @@ calculate_feas_partition <- function(matA, nt = 30) {
   }
 
   # there are two definitions of partitions that need to be compared
-  omega_vec <- map_dbl(get_region(matA), ~calculate_feas_commun(., nt = nt, raw = TRUE))
+  omega_vec <- map_dbl(get_region(matA), ~feasibility_community(., nt = nt, raw = TRUE))
   return(omega_vec)
 }
 
@@ -155,12 +184,12 @@ calculate_feas_partition <- function(matA, nt = 30) {
   # matA: interaction matrix
   # sp: which species (index in the matrix) to calculate
   # nt: number of trails
-calculate_feas_sp_survival <- function(matA, sp, nt = 30) {
+feasibility_species <- function(matA, sp, nt = 30) {
   # add up all the conditional probabilities
   S <- ncol(matA)
   if(sp > S) stop("sp is out of range")
   feas_regions <- which(get_compo(S, 0)[, sp] == 1)
-  return(calculate_feas_partition(matA, nt = nt)[feas_regions] %>% sum())
+  return(feasibility_partition(matA, nt = nt)[feas_regions] %>% sum())
 }
 
 # calculate the full resistance of community S to parameter perturbations
@@ -171,10 +200,7 @@ calculate_feas_sp_survival <- function(matA, sp, nt = 30) {
   # all: TRUE for all distance values; FALSE for the minimum distance
   # norm: "l1" for L-1 norm; "l2" for L-2 norm
 # output: distance to border (full resistance)
-calculate_resistance_full <- function(matA, r, norm = "l2", nt = 100, all = FALSE) {
-  # Function that samples m vectors uniformly on a (n-1)-dimensional simplex
-  # Inputs: m = number of samples; n = dimension of the space
-  # Output: m vectors of length n that sum up to 1
+feasibility_resistance_full <- function(matA, r, norm = "l2", nt = 100, all = FALSE) {
   simplex_sampling <- function(m, n) {
     r <- list()
     for (j in 1:m) {
@@ -198,7 +224,7 @@ calculate_resistance_full <- function(matA, r, norm = "l2", nt = 100, all = FALS
       r <- norm1(r); matA <- norm1(matA)
       distances_list[[i]] <- 1:nt %>% 
         map_dbl(function(x) {
-          t <- unlist(simplex_sampling(1, nrow(A)-1))
+          t <- unlist(simplex_sampling(1, nrow(matA)-1))
           border_point <- c(matA[, vertex] %*% t)
           euclidean_distance(r, border_point)
         })
@@ -207,7 +233,7 @@ calculate_resistance_full <- function(matA, r, norm = "l2", nt = 100, all = FALS
       r <- norm2(r); matA <- norm2(matA)
       distances_list[[i]] <- 1:nt %>% 
         map_dbl(function(x) {
-          t <- unlist(simplex_sampling(1, nrow(A)-1))
+          t <- unlist(simplex_sampling(1, nrow(matA)-1))
           border_point <- c(matA[, vertex] %*% t)
           border_point_norm <- border_point / sqrt(sum(border_point^2))
           arc_length(r, border_point_norm)
@@ -230,8 +256,7 @@ calculate_resistance_full <- function(matA, r, norm = "l2", nt = 100, all = FALS
   # all: TRUE for all distance values; FALSE for the minimum distance
   # norm: "l1" for L-1 norm; "l2" for L-2 norm
 # output: distance to border (full resistance)
-calculate_resistance_partial <- function(matA, r, norm = "l2") {
-  
+feasibility_resistance_partial <- function(matA, r, norm = "l2") {
   euclidean_distance <- function(a, b) {
     sqrt(sum((a - b)^2))
   }
@@ -253,14 +278,13 @@ calculate_resistance_partial <- function(matA, r, norm = "l2") {
   return(distances)
 }
 
-
 # calculate the recovery of community S to abundance perturbations
 # input:
   # matA: interaction matrix
   # r: intrinsic growth rate vector
   # type: "full" for full recovery; "part" for partial recovery
 # output: partial recovery; full recovery
-calculate_recovery <- function(matA, r, type) {
+feasibility_recovery <- function(matA, r, type) {
   N <- solve(matA) %*% r
   matJ <- matA %*% diag(c(N))
   if (type == "full") {
@@ -276,14 +300,14 @@ calculate_recovery <- function(matA, r, type) {
   # matA: interaction matrix
   # sp: which species (index in the matrix) to calculate
   # nt: number of trails
-calculate_contribution <- function(matA, sp, nt = 30) {
+feasibility_contribution <- function(matA, sp, nt = 30) {
   S <- ncol(matA)
   remaining_sp <- setdiff(1:S, sp)
   record0 <- get_compo(S,0)
 
   sub_matA <- matA[-sp, -sp]
-  f1 <- calculate_feas_commun(sub_matA, nt = nt)
-  f2 <- sum(calculate_feas_partition(matA, nt = nt)[c(2^S, 2^S-sp)])
+  f1 <- feasibility_community(sub_matA, nt = nt)
+  f2 <- sum(feasibility_partition(matA, nt = nt)[c(2^S, 2^S-sp)])
 
   long_term_eff <- f2 / f1
   return(long_term_eff)
@@ -294,8 +318,7 @@ calculate_contribution <- function(matA, sp, nt = 30) {
   # A: interaction matrix
   # invader: which species (index in the matrix) to calculate
   # ns: number of sampling points
-calculate_feas_sp_invasion <- function(matA, invader, nt = 5000) {
-
+feasibility_invasion <- function(matA, invader, nt = 5000) {
   S <- nrow(matA)
   res <- c(1:S)[-invader]
   
@@ -326,31 +349,24 @@ calculate_feas_sp_invasion <- function(matA, invader, nt = 5000) {
   num_surv <- sapply(surv_sp, function(x) length(x))
 
   # augmentation probability
-  augmentation <- sum(num_surv == S)/n_point_inside
+  augm <- sum(num_surv == S)/n_point_inside
   # replacement probability
-  replacement <- (sum(num_surv < S) - sum(res_only))/n_point_inside
+  repl <- (sum(num_surv < S) - sum(res_only))/n_point_inside
   # output
-  return(list(colonization = igr, augmentation = augmentation, replacement = replacement))
+  return(list(colonization = igr, augmentation = augm, replacement = repl))
 }
 
 
 
 
 
+# ------------------------------------------------------------------
+# ------------------------------------------------------------------
+# --- dependent functions for implementation of above functions ----
+# ------------------------------------------------------------------
+# ------------------------------------------------------------------
 
 
-
-
-
-
-
-
-
-
-
-
-# --- dependent functions for implementation of above functions ---
-# ... ...
 
 
 # function that normalizes a vector in the L1 norm
@@ -373,11 +389,14 @@ norm2 <- function(a) {
   return(a)
 }
 
-# function that normalizes the spanning vectors of the feasibility domain in the L2 norm
-generate_span_vectors <- function(alpha) {
-  apply(alpha, 2, function(x) norm2(x))
+inside_detection <- function(Span, vector) {
+  lambda <- solve(Span, vector)
+  if (sum(lambda >= -1e-10) == length(lambda)) {
+    return(1)
+  } else {
+    return(0)
+  }
 }
-# now merged into the norm2 function
 
 # function that computes all the extreme points that belong to original vertexes
 inside_vertex_detection <- function(A, B) {
@@ -402,15 +421,6 @@ inside_vertex_detection <- function(A, B) {
     }
   }
   return(inside_vertex)
-}
-
-inside_detection <- function(Span, vector) {
-  lambda <- solve(Span, vector)
-  if (sum(lambda >= -1e-10) == length(lambda)) {
-    return(1)
-  } else {
-    return(0)
-  }
 }
 
 # function that computes all the extreme points generated that are generated by the intersections of the cones
@@ -588,23 +598,20 @@ calculate_omega <- function(vertex, raw = FALSE, nsamples = 100,
 }
 
 
-
-  # function that generates a table of presence/absence combinations
-  # params: N = number of species, nv = initial notation for absence
-  # return: the table of all possible communities (as a matrix)
-  get_compo <- function(N, nv = 0) {
-    record <- matrix(nv, nrow = 2^N, ncol = N)
-    k <- 2
-    for (s in 1:N){
-      for (i in 1:choose(N, s)){
-        record[k, utils::combn(N, s)[, i]] <- 1
-        k <- k + 1
-      }
+# function that generates a table of presence/absence combinations
+# params: N = number of species, nv = initial notation for absence
+# return: the table of all possible communities (as a matrix)
+get_compo <- function(N, nv = 0) {
+  record <- matrix(nv, nrow = 2^N, ncol = N)
+  k <- 2
+  for (s in 1:N){
+    for (i in 1:choose(N, s)){
+      record[k, utils::combn(N, s)[, i]] <- 1
+      k <- k + 1
     }
-    return(record)
   }
-
-
+  return(record)
+}
 
 # Solves the system of ordinary differential equations
 # given by the generalized Lotka-Volterra dynamics and
@@ -681,7 +688,7 @@ lotka_volterra <- function(N0, r, K, A, times = seq(0, 200, 0.01),
 # this value are considered extinct
 # formalism: whether to use r or K Lotka-Volterra formalism
 lv_pruning <- function(N0, r, K, A, times = seq(0, 200, 0.01), 
-                       formalism = "r", extinct_tol = 0.000001) {
+                        formalism = "r", extinct_tol = 1e-6) {
   # solve Lotka-Volterra dynamics
   eq <- lotka_volterra(N0, r, K, A, times, formalism, final_abundance = TRUE)
   # return pruned system
