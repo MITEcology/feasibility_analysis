@@ -67,7 +67,7 @@ check_negative_definite <- function(A){
   # mu: mean of interaction strength
   # dist: distribution of interaction strength
 # output: an S times S interaction matrix
-generate_inte_neg_def <- function(S, sigma, conne = 1, dist = "norm", mu = -0.1*sigma, trail = 0) {
+generate_inte_gs <- function(S, sigma, conne = 1, dist = "norm", mu = -0.1*sigma, trail = 0) {
   if (dist == "norm") {
     matA <- rnorm(S * S, mean = mu, sd = sigma)
   } else if (dist == "lnorm") {
@@ -83,7 +83,7 @@ generate_inte_neg_def <- function(S, sigma, conne = 1, dist = "norm", mu = -0.1*
     return(matA)
   } else if (trail < 100) {
     trail <- trail + 1
-    generate_inte_neg_def(S, sigma, conne, mu, dist, trail)
+    generate_inte_gs(S, sigma, conne, mu, dist, trail)
   } else {
     stop("Error: cannot generate negative definite matrix within 100 trails")
   }
@@ -338,22 +338,9 @@ feasibility_invasion <- function(matA, invader, nt = 5000) {
   
   # calculate the colonization probability with positive igr 
   igr <- sum(check_igr)/n_point_inside
-  
-  # sample initial conditions
-  # N0 <- replicate(n_point_inside, initial_condition(S), simplify = FALSE) reduced to the following:
-  N0 <- replicate(n_point_inside, rep(0.5, S), simplify = FALSE)
 
-  # check the surviving species within the feasibility region of residents in isolation
-  # surv_sp <- mapply(lv_pruning, r = r_inside, N0 = N0, MoreArgs = list(A = A), SIMPLIFY = FALSE) reduced to the following: (with a test)
-  surv_sp <- map2(r_inside, N0, ~lv_pruning(r = .x, N0 = .y, A = matA))
-  num_surv <- sapply(surv_sp, function(x) length(x))
-
-  # augmentation probability
-  augm <- sum(num_surv == S)/n_point_inside
-  # replacement probability
-  repl <- (sum(num_surv < S) - sum(res_only))/n_point_inside
   # output
-  return(list(colonization = igr, augmentation = augm, replacement = repl))
+  return(igr)
 }
 
 
