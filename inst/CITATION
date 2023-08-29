@@ -1,8 +1,8 @@
-citHeader("To cite feasabilityR in publications use:")
+citHeader("To cite feasibilityR in publications use:")
 
 citEntry(
   entry    = "Manual",
-  title    = "feasabilityR: An R package for the analysis of ecological feasability analysis",
+  title    = "feasibilityR: An R package for the analysis of ecological feasibility of species and communities.",
   author   = "Serguei Saavedra, Oscar Godoy, Ignasi Bartomeus, ...",
   # journal  = ,
   year     = "2023",
@@ -10,6 +10,6 @@ citEntry(
   # number   = ,
   # pages    = ,
   url      = "https://github.com/MITEcology/feasibility_analysis",
-  textVersion = paste("Serguei Saavedra, Oscar Godoy, Ignasi Bartomeus, ..., 2023. feasabilityR: An R package for the analysis of ecological feasability analysis.",
+  textVersion = paste("Serguei Saavedra, Oscar Godoy, Ignasi Bartomeus, ..., 2023. feasibilityR: An R package for the analysis of ecological feasibility of species and communities.",
                       "https://github.com/MITEcology/feasibility_analysis")
 )
