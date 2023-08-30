@@ -4,7 +4,7 @@
 \alias{generate_inte_rand}
 \title{Generate random interaction matrix}
 \usage{
-generate_inte_rand(S, sigma, conne = 1, mu = 0, dist = "norm")
+generate_inte_rand(S, sigma, conne = 1, dist = "norm", mu = 0)
 }
 \arguments{
 \item{S}{Numeric, number of species}
@@ -13,9 +13,9 @@ generate_inte_rand(S, sigma, conne = 1, mu = 0, dist = "norm")
 
 \item{conne}{Numeric, connectivity of interaction, default to 1}
 
-\item{mu}{Numeric, mean interaction, default to 0}
-
 \item{dist}{Character, distribution of interaction (normal, log-normal, Half-Normal, or Uniform). Default to "norm"}
+
+\item{mu}{Numeric, mean interaction, default to 0}
 }
 \value{
 an SxS interaction matrix A.
@@ -27,5 +27,5 @@ Generate random interaction matrix A of a community S
 Note that if one chooses a half-normal distribution, the interaction matrix can be interpreted as a purely competition system. As default, the diagonal values are all set to a_ii = -1 (e.g., self-regulation).
 }
 \examples{
-matA <- generate_inte_rand(4, 1, 1, 0, "norm")  ## Generate a random matrix
+matA <- generate_inte_rand(4, 1, 1, 0, "norm")  ## Generate a random interaction matrix
 }
