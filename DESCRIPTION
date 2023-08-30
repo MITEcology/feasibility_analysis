@@ -14,7 +14,7 @@ Authors@R:
            comment = c(ORCID = "0000-0002-6005-3740 ")),
     person("Chuliang", "Song", , "clsong.ecology@gmail.com", role = c("ctb"),
            comment = c(ORCID = "0000-0001-7490-8626 ")))
-Description: Analysis of feasibility within the largest framework of structural stability in ecology.
+Description: Analysis of feasibility within the framework of structural stability in ecology.
 License: MIT
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
