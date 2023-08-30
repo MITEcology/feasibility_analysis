@@ -12,7 +12,7 @@
 #'
 #' @examples
 #' matA <- generate_inte_rand(4, 1, 1, "norm")  ## Generate a random interaction matrix
-#' matA
+#' feasibility_community(matA)
 feasibility_community <- function(A, nt = 30, raw = TRUE) {
   S <- nrow(A)
   omega <- function(S, Sigma) {
