@@ -9,9 +9,9 @@ Authors@R:
     person("Ignasi", "Bartomeus", , "nacho.bartomeus@gmail.com", role = c("aut"),
            comment = c(ORCID = "0000-0001-7893-4389 ")),
     person("Jie", "Deng", , "jiedeng@mit.edu", role = c("aut"),
-           comment = c(ORCID = "0000-0002-0604-7884 ")))
+           comment = c(ORCID = "0000-0002-0604-7884 ")),
     person("Chengyi", "Long", , "cylong@mit.edu", role = c("aut"),
-           comment = c(ORCID = "0000-0002-6005-3740 ")))
+           comment = c(ORCID = "0000-0002-6005-3740 ")),
     person("Chuliang", "Song", , "clsong.ecology@gmail.com", role = c("ctb"),
            comment = c(ORCID = "0000-0001-7490-8626 ")))
 Description: Analysis of feasibility within the largest framework of structural stability in ecology.
