@@ -1,5 +1,5 @@
-Package: feasabilityR
-Title: Community ecology feasability analysis
+Package: feasibilityR
+Title: Community ecology feasibility analysis
 Version: 0.0.1
 Authors@R: 
   c(person("Sergei", "Saavedra", , "sersaa@mit.com", role = c("aut", "cre"),

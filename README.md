@@ -1,9 +1,9 @@
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.8289566.svg)](https://doi.org/10.5281/zenodo.8289566)
 
 
-# feasabilityR
+# feasibilityR
 
-The goal of feasabilityR is to is to facilitate the analysis of feasibility within the largest framework of structural stability in ecology.
+The goal of feasibilityR is to is to facilitate the analysis of feasibility within the largest framework of structural stability in ecology.
 
 Feasibility (Omega): the size of the feasibility domain compatible with the long-term persistence of a given set of species C from a given community (pool) of species S. The size is estimated by the normalized surface area of a unit sphere (i.e., also known as the normalized solid angle). Note that feasibility (size of the feasibility domain) is not directly a probability measure. To do so, one needs to normalize the feasibility such that values lie within [0,1] according to the characteristics of the community (see section feasibility of a community S).
 
@@ -27,7 +27,7 @@ devtools::install_github("MITEcology/feasibility_analysis")
 This is a basic example:
 
 ``` r
-library(feasabilityR)
+library(feasibilityR)
 
 #First we can generate some random matrices
 matA <- generate_inte_rand(4, 1, 1, 0, "norm")  ## Generate a random matrix
@@ -47,7 +47,7 @@ feasibility_community(matB)
 If using this package, please cite it:
 
 ``` r
-citation("feasabilityR")
+citation("feasibilityR")
 ```
 
 ## Acknowledgements
