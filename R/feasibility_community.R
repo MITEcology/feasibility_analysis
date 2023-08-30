@@ -1,5 +1,3 @@
-#' Calculate the feasibility of a community
-#'
 #' Calculate the feasibility of a community S
 #'
 #' @param A Numeric, an SxS interaction matrix A
