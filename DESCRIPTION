@@ -2,7 +2,7 @@ Package: feasibilityR
 Title: Community ecology feasibility analysis
 Version: 0.0.1
 Authors@R: 
-  c(person("Sergei", "Saavedra", , "sersaa@mit.com", role = c("aut", "cre"),
+  c(person("Serguei", "Saavedra", , "sersaa@mit.com", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0003-1768-363X ")),
     person("Oscar", "Godoy", , "ogodoy.re@gmail.com", role = c("aut"),
            comment = c(ORCID = "0000-0003-4988-6626 ")),
