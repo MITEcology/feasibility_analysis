@@ -2,18 +2,18 @@ Package: feasibilityR
 Title: Community ecology feasibility analysis
 Version: 0.0.1
 Authors@R: 
-  c(person("Serguei", "Saavedra", , "sersaa@mit.com", role = c("aut", "cre"),
-           comment = c(ORCID = "0000-0003-1768-363X ")),
+    c(person("Serguei", "Saavedra", , "sersaa@mit.com", role = c("aut", "cre"),
+            comment = c(ORCID = "0000-0003-1768-363X ")),
     person("Oscar", "Godoy", , "ogodoy.re@gmail.com", role = c("aut"),
-           comment = c(ORCID = "0000-0003-4988-6626 ")),
+            comment = c(ORCID = "0000-0003-4988-6626 ")),
     person("Ignasi", "Bartomeus", , "nacho.bartomeus@gmail.com", role = c("aut"),
-           comment = c(ORCID = "0000-0001-7893-4389 ")),
+            comment = c(ORCID = "0000-0001-7893-4389 ")),
     person("Jie", "Deng", , "jiedeng@mit.edu", role = c("aut"),
-           comment = c(ORCID = "0000-0002-0604-7884 ")),
+            comment = c(ORCID = "0000-0002-0604-7884 ")),
     person("Chengyi", "Long", , "cylong@mit.edu", role = c("aut"),
-           comment = c(ORCID = "0000-0002-6005-3740 ")),
+            comment = c(ORCID = "0000-0002-6005-3740 ")),
     person("Chuliang", "Song", , "clsong.ecology@gmail.com", role = c("ctb"),
-           comment = c(ORCID = "0000-0001-7490-8626 ")))
+            comment = c(ORCID = "0000-0001-7490-8626 ")))
 Description: Analysis of feasibility within the framework of structural stability in ecology.
 License: MIT
 Encoding: UTF-8
