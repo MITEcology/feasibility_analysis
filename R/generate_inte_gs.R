@@ -17,6 +17,7 @@
 #'
 #' @examples
 #' matA <- generate_inte_gs(4, 1, 1, "norm")  ## Generate a globally stable random interaction matrix
+#' matA
 generate_inte_gs <- function(S, sigma, conne = 1, dist = "norm", mu = -0.1 * sigma, trail = 0) {
   if (dist == "norm") {
     matA <- rnorm(S * S, mean = mu, sd = sigma)

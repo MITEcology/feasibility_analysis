@@ -16,6 +16,7 @@
 #'
 #' @examples
 #' matA <- generate_inte_rand(4, 1, 1, "norm")  ## Generate a random interaction matrix
+#' matA
 generate_inte_rand <- function(S, sigma, conne = 1, dist = "norm", mu = 0) {
   #defensive programming here (i.e. check that S is numeric, dist is one of the accepted options, etc...)
   if (dist == "norm") {
