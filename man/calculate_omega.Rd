@@ -2,7 +2,7 @@
 % Please edit documentation in R/calculate_omega.R
 \name{calculate_omega}
 \alias{calculate_omega}
-\title{Calculate omega of arbitrary region}
+\title{Calculate the omega value of arbitrary region}
 \usage{
 calculate_omega(vertex, raw = FALSE, nsamples = 1000, method = "convex_hull")
 }

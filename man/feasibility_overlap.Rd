@@ -18,7 +18,7 @@ feasibility_overlap(matA, matB, raw = TRUE, nsamples = 3000, nt = 10)
 \item{nt}{Numeric, number of replications to reduce numerical instabilities, default to TRUE}
 }
 \value{
-Overlap: feasiblity region of overlap
+A numeric value of the feasibility overlap between these two communities
 }
 \description{
 Feasibility overlap between communities \eqn{\mathcal{S}_1} and \eqn{\mathcal{S}_2}

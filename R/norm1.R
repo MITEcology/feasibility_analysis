@@ -1,5 +1,6 @@
-#' function that normalizes a vector in the L1 norm
-#' @description This function normalizes a vector in the L1 norm.
+#' Normalizes vector(s) in the L1 norm
+#'
+#' @description This function normalizes vector(s) in the L1 norm.
 #'
 #' @param a Numeric, a vector or a matrix
 #'

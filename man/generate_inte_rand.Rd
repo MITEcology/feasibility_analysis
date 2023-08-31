@@ -21,7 +21,7 @@ generate_inte_rand(S, sigma, conne = 1, dist = "norm", mu = 0)
 an SxS interaction matrix A.
 }
 \description{
-Generate random interaction matrix A of a community S
+Generate random interaction matrix A of a community \eqn{\mathcal{S}}
 }
 \note{
 Note that if one chooses a half-normal distribution, the interaction matrix can be interpreted as a purely competition system. As default, the diagonal values are all set to a_ii = -1 (e.g., self-regulation).

@@ -13,11 +13,11 @@
 #'
 #' @note Note that if one chooses a half-normal distribution, the interaction matrix can be interpreted as a purely competition system. As default, the diagonal values are all set to a_ii = -1 (e.g., self-regulation).
 #'
-#' @export
-#'
 #' @examples
 #' matA <- generate_inte_gs(4, 1, 1, "norm")  ## Generate a globally stable random interaction matrix
 #' matA
+#' 
+#' @export
 generate_inte_gs <- function(S, sigma, conne = 1, dist = "norm", mu = -0.1 * sigma, trail = 0) {
   if (dist == "norm") {
     matA <- rnorm(S * S, mean = mu, sd = sigma)

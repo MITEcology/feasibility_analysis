@@ -2,7 +2,7 @@
 % Please edit documentation in R/norm2.R
 \name{norm2}
 \alias{norm2}
-\title{function that normalizes a vector in the L2 norm}
+\title{Normalizes vector(s) in the L2 norm}
 \usage{
 norm2(a)
 }
@@ -13,5 +13,5 @@ norm2(a)
 A vector or a matrix, normalized in the L2 norm
 }
 \description{
-This function normalizes a vector in the L2 norm.
+This function normalizes vector(s) in the L2 norm.
 }

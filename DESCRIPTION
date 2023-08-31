@@ -29,6 +29,7 @@ LazyData: true
 Imports: 
     stats,
     tidyverse,
+    purrr,
     mvtnorm,
     mgcv,
     geometry,
