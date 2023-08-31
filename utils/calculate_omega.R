@@ -30,7 +30,7 @@ calculate_omega <- function(vertex, raw = FALSE, nsamples = 100,
     
     vertex <- cbind(vertex, rep(0, num))
     
-    vol_ori <- (convhulln(t(vertex), output.options = TRUE)$vol)
+    vol_ori <- (geometry::convhulln(t(vertex), output.options = TRUE)$vol)
     vol_ball <- (pi^(num / 2) / gamma(num / 2 + 1))
     # vol_ball <- calculate_omega(diag(num), nsamples = nsamples)
     
