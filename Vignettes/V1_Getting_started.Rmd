@@ -18,6 +18,10 @@ knitr::opts_chunk$set(message = FALSE, warning = FALSE)
 
 The `feasibilityR` package provides a general interface to estimate the feasibility of a given community given different types of ecological communities and structure of species interactions...
 
+```{r}
+ADD FUNCTIONS OR GRAPHS HERE, COPY IT AS MANY TIMES AS NEEDED
+```
+
 **References**
 
 ADD references here. 
