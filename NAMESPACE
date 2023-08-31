@@ -3,6 +3,7 @@
 export(feasibility_community)
 export(feasibility_overlap)
 export(feasibility_partition)
+export(feasibility_species)
 export(generate_inte_gs)
 export(generate_inte_rand)
 importFrom(dplyr,near)

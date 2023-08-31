@@ -1,4 +1,4 @@
-#' calculate the feasibility partition of all possible compositions
+#' Calculate the feasibility partition of all possible compositions
 #'
 #' @description calculate the feasibility partition of all possible compositions \eqn{\mathcal{C} \subseteq \mathcal{S}}
 #' 
@@ -7,14 +7,14 @@
 #' 
 #' @importFrom purrr map_dbl
 #' @importFrom pracma eye
-#' @return a list of all possible regions (as matrices)
+#' @return a vector \eqn{\{\mathbf{\Omega}\}} of length \eqn{2^{|\mathcal{S}|}} for all \eqn{\mathcal{C} \subseteq \mathcal{S}}, and essentially \eqn{\sum_{\mathcal{C}} \Omega(D(\mathcal{C})) = 1}
 #' 
 #' @note the interaction matrix matA needs to be globally stable in order for a meaningful partition of the parameter space.
-#'
+#' @export
+#' 
 #' @examples
 #' matA <- generate_inte_gs(4, 0.8, 1, "norm")  ## Generate a random interaction matrix
 #' feasibility_partition(matA)
-#' @export
 feasibility_partition <- function(matA, nt = 30) {
   # function that partitions the parameter space from a given interaction matrix
   # params: inte = interaction matrix (representing LV dynamics)

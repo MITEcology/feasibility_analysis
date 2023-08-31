@@ -2,7 +2,7 @@
 % Please edit documentation in R/feasibility_partition.R
 \name{feasibility_partition}
 \alias{feasibility_partition}
-\title{calculate the feasibility partition of all possible compositions}
+\title{Calculate the feasibility partition of all possible compositions}
 \usage{
 feasibility_partition(matA, nt = 30)
 }
@@ -12,7 +12,7 @@ feasibility_partition(matA, nt = 30)
 \item{nt}{Numeric, number of replications to reduce numerical instabilities, default to 30}
 }
 \value{
-a list of all possible regions (as matrices)
+a vector \eqn{\{\mathbf{\Omega}\}} of length \eqn{2^{|\mathcal{S}|}} for all \eqn{\mathcal{C} \subseteq \mathcal{S}}, and essentially \eqn{\sum_{\mathcal{C}} \Omega(D(\mathcal{C})) = 1}
 }
 \description{
 calculate the feasibility partition of all possible compositions \eqn{\mathcal{C} \subseteq \mathcal{S}}
