@@ -1,8 +1,8 @@
 #' Check if a matrix is negative definite
+#'
 #' @param matA Numeric, an interaction matrix
 #'
 #' @return TRUE if the matrix is negative definite, FALSE otherwise
-#' @export
 #'
 #' @examples
 #' matA <- generate_inte_rand(4, 1, 1, 0, "norm")  ## Generate a random interaction matrix

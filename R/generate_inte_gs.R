@@ -1,6 +1,6 @@
-#' Generate random interaction matrix that satisfies global dynamical stability
+#' Generate random interaction matrix (globally stable)
 #'
-#' Generate a globally stable random interaction matrix A of a community S
+#' @description Generate a globally stable random interaction matrix A of a community \eqn{\mathcal{S}}
 #'
 #' @param S Numeric, number of species
 #' @param sigma Numeric, standard deviation of interaction

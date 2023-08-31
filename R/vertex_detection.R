@@ -1,4 +1,12 @@
-# function that computes all the extreme points
+#' detect all extreme points
+#'
+#' @description function that computes all the extreme points
+#' @param A matrix of the first set of vertexes
+#' @param B matrix of the second set of vertexes
+#'
+#' @importFrom dplyr near
+#'
+#' @return a matrix of all the extreme points
 vertex_detection <- function(A, B) {
   num <- ncol(A)
   inside_vertex <- inside_vertex_detection(A, B)
@@ -16,8 +24,8 @@ vertex_detection <- function(A, B) {
 
   # delete the points that are nonzero due to numerical error
   delete_zeroes <- c()
-  for (i in 1:ncol(vertex)) {
-    if (near(sum(vertex[, i]^2), 0)) {
+  for (i in seq_len(ncol(vertex))) {
+    if (dplyr::near(sum(vertex[, i]^2), 0)) {
       delete_zeroes <- c(delete_zeroes, i)
     }
   }
@@ -26,13 +34,13 @@ vertex_detection <- function(A, B) {
 
   # delete the same ones
   if (length(vertex) > num) {
-    for (test in 1:ncol(vertex)) {
+    for (test in seq_len(ncol(vertex))) {
       vertex[, test] <- norm2(vertex[, test])
     }
     delete_duplicates <- c()
     for (i in 1:(ncol(vertex) - 1)) {
       for (j in (i + 1):ncol(vertex)) {
-        if (sum(near(vertex[, i], vertex[, j])) == nrow(vertex)) {
+        if (sum(dplyr::near(vertex[, i], vertex[, j])) == nrow(vertex)) {
           delete_duplicates <- c(delete_duplicates, j)
         }
       }

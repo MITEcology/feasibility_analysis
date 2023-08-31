@@ -2,7 +2,7 @@
 % Please edit documentation in R/feasibility_overlap.R
 \name{feasibility_overlap}
 \alias{feasibility_overlap}
-\title{Feasibility overlap between communities \eqn{\mathcal{S}_1} and \eqn{\mathcal{S}_2}}
+\title{Calculate the feasibility overlap between two communities}
 \usage{
 feasibility_overlap(matA, matB, raw = TRUE, nsamples = 3000, nt = 10)
 }
@@ -24,9 +24,7 @@ Overlap: feasiblity region of overlap
 Feasibility overlap between communities \eqn{\mathcal{S}_1} and \eqn{\mathcal{S}_2}
 }
 \note{
-interaction matrices need to have same dimension.
-
-Note Inside the function raw and nt can be changed.
+interaction matrices need to have the same dimension.
 }
 \examples{
 matA <- generate_inte_rand(4, 1, 1, "norm")  ## Generate a random interaction matrix A

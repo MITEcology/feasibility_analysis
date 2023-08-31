@@ -1,6 +1,6 @@
 #' Generate random interaction matrix
 #'
-#' Generate random interaction matrix A of a community S
+#' @description Generate random interaction matrix A of a community \eqn{\mathcal{S}}
 #'
 #' @param S Numeric, number of species
 #' @param sigma Numeric, standard deviation of interaction

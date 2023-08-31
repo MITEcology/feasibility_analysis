@@ -1,4 +1,6 @@
-#' Feasibility overlap between communities \eqn{\mathcal{S}_1} and \eqn{\mathcal{S}_2}
+#' Calculate the feasibility overlap between two communities
+#'
+#' @description Feasibility overlap between communities \eqn{\mathcal{S}_1} and \eqn{\mathcal{S}_2}
 #'
 #' @param matA Numeric, an SxS interaction matrix A
 #' @param matB Numeric, an SxS interaction matrix B
@@ -6,13 +8,9 @@
 #' @param nsamples Numeric, number of MonteCarlo sampling points, default to 3000
 #' @param nt Numeric, number of replications to reduce numerical instabilities, default to TRUE
 #'
-#' @return Overlap: feasiblity region of overlap
+#' @return A numeric value of the feasibility overlap between these two communities
 #'
-#' @note interaction matrices need to have same dimension.
-#'
-#' Note Inside the function raw and nt can be changed.
-#' @importFrom mvtnorm pmvnorm
-#' @importFrom magrittr %>%
+#' @note interaction matrices need to have the same dimension.
 #'
 #' @export
 #'
