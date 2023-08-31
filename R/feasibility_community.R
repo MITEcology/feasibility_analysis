@@ -5,9 +5,9 @@
 #' @param nt Numeric, number of replications to reduce numerical instabilities, default to 30
 #' @param raw Logical, whether to return the raw feasibility or the normalized feasibility, default to TRUE
 #'
-#' @return Feasibility ($\Omega$) of all the $|\mathcal{S}|$ species in the community (i.e., the size of $D(\mathcal{S})$).
+#' @return Feasibility \eqn{(\Omega)} of all the \eqn{|\mathcal{S}|} species in the community (i.e., the size of \eqn{D(\mathcal{S})}).
 #'
-#' @note This measure typically decreases with dimension $|\mathcal{S}|$. If the matrix has positive and negative values then $\Omega \in [0,0.5]$; otherwise $\Omega \in [0,1/2^n]$---these bounds are important if the user aims to transform feasibility into a probability measure that assumes a uniform distribution of directions in parameter space.
+#' @note This measure typically decreases with dimension \eqn{|\mathcal{S}|}. If the matrix has positive and negative values then \eqn{\Omega \in [0,0.5]}; otherwise \eqn{\Omega \in [0,1/2^n]}---these bounds are important if the user aims to transform feasibility into a probability measure that assumes a uniform distribution of directions in parameter space.
 #'
 #' Note Inside the function nt can be changed to specify the number of replications to reduce numerical instabilities (currently set to 30).
 #' @importFrom mvtnorm pmvnorm
@@ -29,7 +29,7 @@ feasibility_community <- function(matA, nt = 30, raw = TRUE) {
     return(0)
   }
   else {
-    Sigma <- solve(t(matA) %*% A)
+    Sigma <- solve(t(matA) %*% matA)
     return(replicate(nt, omega(S, Sigma)) %>% mean())
   }
 }

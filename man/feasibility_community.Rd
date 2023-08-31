@@ -7,20 +7,20 @@
 feasibility_community(matA, nt = 30, raw = TRUE)
 }
 \arguments{
+\item{matA}{Numeric, an SxS interaction matrix A}
+
 \item{nt}{Numeric, number of replications to reduce numerical instabilities, default to 30}
 
 \item{raw}{Logical, whether to return the raw feasibility or the normalized feasibility, default to TRUE}
-
-\item{A}{Numeric, an SxS interaction matrix A}
 }
 \value{
-Feasibility ($\Omega$) of all the $|\mathcal{S}|$ species in the community (i.e., the size of $D(\mathcal{S})$).
+Feasibility \eqn{(\Omega)} of all the \eqn{|\mathcal{S}|} species in the community (i.e., the size of \eqn{D(\mathcal{S})}).
 }
 \description{
 Calculate the feasibility of a community S
 }
 \note{
-This measure typically decreases with dimension $|\mathcal{S}|$. If the matrix has positive and negative values then $\Omega \in \link{0,0.5}$; otherwise $\Omega \in \link{0,1/2^n}$---these bounds are important if the user aims to transform feasibility into a probability measure that assumes a uniform distribution of directions in parameter space.
+This measure typically decreases with dimension \eqn{|\mathcal{S}|}. If the matrix has positive and negative values then \eqn{\Omega \in [0,0.5]}; otherwise \eqn{\Omega \in [0,1/2^n]}---these bounds are important if the user aims to transform feasibility into a probability measure that assumes a uniform distribution of directions in parameter space.
 
 Note Inside the function nt can be changed to specify the number of replications to reduce numerical instabilities (currently set to 30).
 }
