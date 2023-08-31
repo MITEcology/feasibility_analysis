@@ -1,33 +1,35 @@
 #' Calculate the feasibility of a community S
 #'
-#' @param A Numeric, an SxS interaction matrix A
+#' @param matA Numeric, an SxS interaction matrix A
 #'
-#' @return Feasibility ($\Omega$) of all the $|\mathcal{S}|$ species in the community (i.e., the size of $D(\mathcal{S})$). This measure typically decreases with dimension $|\mathcal{S}|$. If the matrix has positive and negative values then $\Omega \in [0,0.5]$; otherwise $\Omega \in [0,1/2^n]$---these bounds are important if the user aims to transform feasibility into a probability measure that assumes a uniform distribution of directions in parameter space.
+#' @param nt Numeric, number of replications to reduce numerical instabilities, default to 30
+#' @param raw Logical, whether to return the raw feasibility or the normalized feasibility, default to TRUE
 #'
-#' @note Note Inside the function nt can be changed to specify the number of replications to reduce numerical instabilities (currently set to 30).
+#' @return Feasibility ($\Omega$) of all the $|\mathcal{S}|$ species in the community (i.e., the size of $D(\mathcal{S})$).
+#'
+#' @note This measure typically decreases with dimension $|\mathcal{S}|$. If the matrix has positive and negative values then $\Omega \in [0,0.5]$; otherwise $\Omega \in [0,1/2^n]$---these bounds are important if the user aims to transform feasibility into a probability measure that assumes a uniform distribution of directions in parameter space.
+#'
+#' Note Inside the function nt can be changed to specify the number of replications to reduce numerical instabilities (currently set to 30).
+#' @importFrom mvtnorm pmvnorm
+#' @importFrom magrittr %>%
 #'
 #' @export
 #'
 #' @examples
 #' matA <- generate_inte_rand(4, 1, 1, "norm")  ## Generate a random interaction matrix
 #' feasibility_community(matA)
-feasibility_community <- function(A, nt = 30, raw = TRUE) {
-  S <- nrow(A)
+feasibility_community <- function(matA, nt = 30, raw = TRUE) {
+  S <- nrow(matA)
   omega <- function(S, Sigma) {
-    m <- matrix(0, S, 1)
-    a <- matrix(0, S, 1)
-    b <- matrix(Inf, S, 1)
     d <- pmvnorm(lower = rep(0, S), upper = rep(Inf, S), mean = rep(0, S), sigma = Sigma)
-    # out <- d[1]^(1 / S) # species level
-    out <- d[1] # community level
-    return(out)
+    return(d[1])
   }
-  f <- function(m) class(try(solve(t(m) %*% m), silent = T)) == "matrix"
-  if (all(f(A) == FALSE)) {
+  f <- function(m) class(try(solve(t(m) %*% m), silent = TRUE)) == "matrix"
+  if (all(f(matA) == FALSE)) {
     return(0)
   }
   else {
-    Sigma <- solve(t(A) %*% A)
+    Sigma <- solve(t(matA) %*% A)
     return(replicate(nt, omega(S, Sigma)) %>% mean())
   }
 }

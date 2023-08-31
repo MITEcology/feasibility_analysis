@@ -32,7 +32,6 @@ Imports:
     mvtnorm,
     mgcv,
     geometry,
-    uniformly,
     furrr,
     pracma,
     combinat,
