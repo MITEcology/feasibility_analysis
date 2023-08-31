@@ -22,7 +22,7 @@ Calculate the feasibility of a community S
 \note{
 This measure typically decreases with dimension \eqn{|\mathcal{S}|}. If the matrix has positive and negative values then \eqn{\Omega \in [0,0.5]}; otherwise \eqn{\Omega \in [0,1/2^n]}---these bounds are important if the user aims to transform feasibility into a probability measure that assumes a uniform distribution of directions in parameter space.
 
-Note Inside the function nt can be changed to specify the number of replications to reduce numerical instabilities (currently set to 30).
+Note Inside the function raw and nt can be changed.
 }
 \examples{
 matA <- generate_inte_rand(4, 1, 1, "norm")  ## Generate a random interaction matrix
