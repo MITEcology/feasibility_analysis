@@ -1,0 +1,25 @@
+---
+title: "Getting start to feasibilityR"
+output: rmarkdown::html_vignette
+author: Saavedra et al.2023
+vignette: >
+  %\VignetteIndexEntry{Getting started}
+  \usepackage[utf8]{inputenc}
+  %\VignetteEngine{knitr::rmarkdown}
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup,echo=FALSE}
+knitr::opts_chunk$set(message = FALSE, warning = FALSE)
+```
+
+**Introduction**
+
+The `feasibilityR` package provides a general interface to estimate the feasibility of a given community...
+
+**References**
+
+ADD references here. 
+
+
