@@ -11,6 +11,10 @@ if (!require(pracma)) {install.packages("pracma"); library(pracma)}
 if (!require(combinat)) {install.packages("combinat"); library(combinat)}
 if (!require(deSolve)) {install.packages("deSolve"); library(deSolve)}
 
+
+# 1. Matrix generation ------
+#Functions to generate different types of matrices to which feasibility can be computed. 
+
 # generate random interaction matrix
 # input:
   # S: number of species
@@ -88,6 +92,36 @@ generate_inte_gs <- function(S, sigma, conne = 1, dist = "norm", mu = -0.1*sigma
     stop("Error: cannot generate negative definite matrix within 100 trails")
   }
 }
+
+#Define symmetric interaction matrix
+A_int <- matrix(rep(0,9), ncol=3)
+A_int[,1] <- -c(1, 0, 0)
+A_int[,2] <- -c(0.3406884710289558, 0.9328944522580684, 0.11678744219579273)
+A_int[,3] <- -c(0.3406884710289558, 0.12410827817548943, 0.9319487652208257)
+
+species_names <- paste0("sp_",1:ncol(A_int))
+colnames(A_int) <- species_names
+rownames(A_int) <- species_names
+A_int
+
+# 2. Estimations the size and shape of the feasibility domain----
+#Functions to estimate the size and the shape of the feasibility domain of a community.
+
+# 3. Comparison of the feasibility domain between communities----
+#Functions to compare the feasibility domain among communities that either differ in the number of species
+#or in the multitrophic structure.
+
+# 4. Estimations of the persistence of individual species and entire communities----
+#Functions that take into account the size and shape of the feasibility domain of a given community
+#to estimate whether individual species can persist as well as the whole community.
+
+# 5. Effects of environmental variability on species persistence. 
+#Functions that take a probabilistic approach to estimate the role of environmental variability
+#and perturbations to estimate the likelihood in individual species and entire communities to persist 
+
+
+
+
 
 # calculate the feasibility of a community
 # input:
@@ -177,6 +211,64 @@ feasibility_partition <- function(matA, nt = 30) {
   # there are two definitions of partitions that need to be compared
   omega_vec <- map_dbl(get_region(matA), ~feasibility_community(., nt = nt, raw = TRUE))
   return(omega_vec)
+}
+
+# function that computes the normalized feasibility from an interaction matrix
+calculate_omega <- function(vertex, raw = FALSE, nsamples = 100,
+                            method = "convex_hull") {
+  num <- nrow(vertex)
+  vertex <- norm2(vertex)
+  
+  if (method == "convex_hull") {
+    set.seed(1010)
+    vertex <- cbind(
+      vertex,
+      vertex %*% t(abs(runif_on_sphere(n = nsamples, d = ncol(vertex), r = 1)))
+    )
+    if (num < 5) {
+      vertex <- norm2(vertex) %*% diag(
+        runif(
+          ncol(vertex),
+          (1 - .05 * (num - 2)),
+          (1 + .05 * (num - 2))
+        )
+      )
+    } else {
+      vertex <- norm2(vertex) %*% diag(
+        runif(
+          ncol(vertex),
+          (1 - .05 * (num - 2)),
+          (1 + .1 * (num - 2))
+        )
+      )
+    }
+    
+    vertex <- cbind(vertex, rep(0, num))
+    
+    vol_ori <- (convhulln(t(vertex), output.options = TRUE)$vol)
+    vol_ball <- (pi^(num / 2) / gamma(num / 2 + 1))
+    # vol_ball <- calculate_omega(diag(num), nsamples = nsamples)
+    
+    omega <- ifelse(raw == FALSE,
+                    (vol_ori / vol_ball)^(1 / num),
+                    vol_ori / vol_ball
+    )
+  }
+  if (method == "sphere") {
+    m <- matrix(0, num, 1)
+    a <- matrix(0, num, 1)
+    b <- matrix(Inf, num, 1)
+    d <- pmvnorm(
+      lower = rep(0, num),
+      upper = rep(Inf, num),
+      mean = rep(0, num), sigma = solve(t(vertex) %*% vertex)
+    )
+    omega <- ifelse(raw == FALSE,
+                    d[1]^(1 / num),
+                    d[1]
+    )
+  }
+  return(omega)
 }
 
 # calculate the feasibility of species survival
@@ -346,12 +438,10 @@ feasibility_invasion <- function(matA, invader, nt = 5000) {
 
 
 
-
-# ------------------------------------------------------------------
-# ------------------------------------------------------------------
-# --- dependent functions for implementation of above functions ----
-# ------------------------------------------------------------------
-# ------------------------------------------------------------------
+##################################################
+#dependent functions for implementation of above functions ####
+###################################################
+###################################################
 
 
 
@@ -526,63 +616,7 @@ vertex_detection <- function(A, B) {
   return(vertex)
 }
 
-# function that computes the normalized feasibility from an interaction matrix
-calculate_omega <- function(vertex, raw = FALSE, nsamples = 100,
-                            method = "convex_hull") {
-  num <- nrow(vertex)
-  vertex <- norm2(vertex)
 
-  if (method == "convex_hull") {
-    set.seed(1010)
-    vertex <- cbind(
-      vertex,
-      vertex %*% t(abs(runif_on_sphere(n = nsamples, d = ncol(vertex), r = 1)))
-    )
-    if (num < 5) {
-      vertex <- norm2(vertex) %*% diag(
-        runif(
-          ncol(vertex),
-          (1 - .05 * (num - 2)),
-          (1 + .05 * (num - 2))
-        )
-      )
-    } else {
-      vertex <- norm2(vertex) %*% diag(
-        runif(
-          ncol(vertex),
-          (1 - .05 * (num - 2)),
-          (1 + .1 * (num - 2))
-        )
-      )
-    }
-
-    vertex <- cbind(vertex, rep(0, num))
-
-    vol_ori <- (convhulln(t(vertex), output.options = TRUE)$vol)
-    vol_ball <- (pi^(num / 2) / gamma(num / 2 + 1))
-    # vol_ball <- calculate_omega(diag(num), nsamples = nsamples)
-
-    omega <- ifelse(raw == FALSE,
-      (vol_ori / vol_ball)^(1 / num),
-      vol_ori / vol_ball
-    )
-  }
-  if (method == "sphere") {
-    m <- matrix(0, num, 1)
-    a <- matrix(0, num, 1)
-    b <- matrix(Inf, num, 1)
-    d <- pmvnorm(
-      lower = rep(0, num),
-      upper = rep(Inf, num),
-      mean = rep(0, num), sigma = solve(t(vertex) %*% vertex)
-    )
-    omega <- ifelse(raw == FALSE,
-      d[1]^(1 / num),
-      d[1]
-    )
-  }
-  return(omega)
-}
 
 
 # function that generates a table of presence/absence combinations
