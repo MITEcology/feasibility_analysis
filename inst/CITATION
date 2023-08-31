@@ -3,7 +3,7 @@ citHeader("To cite feasibilityR in publications use:")
 citEntry(
   entry    = "Manual",
   title    = "feasibilityR: An R package for the analysis of ecological feasibility of species and communities.",
-  author   = "Serguei Saavedra, Oscar Godoy, Ignasi Bartomeus, ...",
+  author   = "Serguei Saavedra, Oscar Godoy, Ignasi Bartomeus, Jie Deng, Chengyi Long, Rudolf Rhor, Chuliang Song.",
   # journal  = ,
   year     = "2023",
   # volume   = ,
