@@ -21,10 +21,10 @@
 #' matB <- generate_inte_rand(4, 1, 1, "norm")  ## Generate a random interaction matrix B
 #' feasibility_overlap(matA,matB)
 feasibility_overlap <- function(matA, matB, raw = TRUE, nsamples = 3000, nt = 10) {
-  num <- nrow(A)
+  num <- nrow(matA)
 
-  overlap_vertex <- vertex_detection(A, B) %>%
-    cbind(vertex_detection(B, A)) %>%
+  overlap_vertex <- vertex_detection(matA, matB) %>%
+    cbind(vertex_detection(matB, matA)) %>%
     unique(MARGIN = 2)
 
   if (qr(overlap_vertex)$rank < num) {
