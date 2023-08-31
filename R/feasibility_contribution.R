@@ -14,7 +14,7 @@
 #' @export
 #'
 #' @examples
-#' matA <- generate_inte_rand(4, 1, 1, "norm")  ## Generate a random interaction matrix
+#' matA <- generate_inte_gs(4, 1, 1, "norm")  ## Generate a random interaction matrix
 #' feasibility_contribution(matA, sp = 1)
 feasibility_contribution <- function(matA, sp, nt = 30) {
   S <- ncol(matA)
