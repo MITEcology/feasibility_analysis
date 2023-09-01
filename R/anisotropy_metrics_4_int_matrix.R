@@ -3,30 +3,29 @@
 #' Given an interaction matrix, this function uses the output of the function
 #' boot_prob_excl_Omega_raw to estimate the mean values and 95% confidence
 #' intervals of the following metrics: small omega (i.e., the S root of capital
-#' Omega, that is, the proportion of the feasible parameter space inside the 
+#' Omega, that is, the proportion of the feasible parameter space inside the
 #' unit sphere) and the anisotropy index (i.e., the relative Shannon diversity
 #' index of the species' probabilities of exclusion).
-#' 
+#'
 #'
 #' @param A_int a SxS interaction matrix, where S is the number of species.
-#' @param number_Omega_replicates a number that specifies how many estimations 
+#' @param number_Omega_replicates a number that specifies how many estimations
 #'    of Omega will be calculated by the quasi-Monte Carlo method in function
-#'    boot_prob_excl_Omega_raw. By default, this parameter is set to 1,000 
+#'    boot_prob_excl_Omega_raw. By default, this parameter is set to 1,000
 #'    replicates.
 #' @param number_boot_replicates a number that specifies how many bootstrap
 #'    estimations of the probability of exclusion and Omega will be calculated
-#'    for each species in function boot_prob_excl_Omega_raw. By default, this 
+#'    for each species in function boot_prob_excl_Omega_raw. By default, this
 #'    parameter is set to 1,000 replicates.
 #' @param use_chol_decomp boolean that specifies if the QR decomposition should
 #' be used to compute Omega.
-#' 
+#'
 #' @import foreach
 #' @import doParallel
 #' @importFrom mvtnorm pmvnorm
 #' @importFrom boot boot
 #' @importFrom pracma crossn
-#' @importFrom matlib inv
-#' @importFrom zipfR Rbeta
+# #' @importFrom zipfR Rbeta
 #' @importFrom stats quantile
 #' @importFrom tibble tibble
 #' @importFrom dplyr pull

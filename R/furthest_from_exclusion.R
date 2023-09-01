@@ -10,8 +10,7 @@
 #' @param A_int a SxS interaction matrix, where S is the number of species.
 #' 
 #' @importFrom pracma crossn
-#' @importFrom matlib inv
-#' @importFrom zipfR Rbeta
+# #' @importFrom zipfR Rbeta
 #'
 #' @return A vector whose length varies between 1 and S. It element contains the 
 #' column index of the species that is/are furthest away from exclusion.

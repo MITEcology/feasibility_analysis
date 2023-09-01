@@ -26,8 +26,7 @@
 #' @importFrom mvtnorm pmvnorm
 #' @importFrom boot boot
 #' @importFrom pracma crossn
-#' @importFrom matlib inv
-#' @importFrom zipfR Rbeta
+# #' @importFrom zipfR Rbeta
 #'
 #' @return A tibble with S rows and 4 columns, that contain the following data:
 #'    \itemize{

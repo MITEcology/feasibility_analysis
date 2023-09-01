@@ -11,7 +11,6 @@
 #' 
 #' @importFrom magrittr %>%
 #' @importFrom pracma crossn
-#' @importFrom matlib inv
 #' @importFrom tibble tibble
 #'
 #' @return A tibble data frame with S rows and 2 columns. Each row contains the 

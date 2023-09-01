@@ -7,7 +7,7 @@
 #' 
 #' @importFrom magrittr %>%
 #' @importFrom pracma crossn
-#' @importFrom matlib inv
+#' @importFrom pracma inv
 #' @importFrom zipfR Rbeta
 #'
 #' @return A list with 3 elements:
@@ -65,7 +65,8 @@ incenter_inradius_isoprob_calculation <- function(A_int){
       
     }
     
-    inv_dir_ver_mat <- matlib::inv(dir_ver_mat)
+    # inv_dir_ver_mat <- pracma::inv(dir_ver_mat)
+    inv_dir_ver_mat <- solve(dir_ver_mat)
     I_aux_mat <- inv_dir_ver_mat %*% matrix(correction_direction,nrow = dimensions, ncol = 1)
     I_aux <- as.numeric(I_aux_mat)
     sin_theta <- sqrt(1/sum(I_aux*I_aux)) # After imposing normalization

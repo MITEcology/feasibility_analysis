@@ -11,8 +11,8 @@
 #' 
 #' @importFrom magrittr %>%
 #' @importFrom pracma crossn
-#' @importFrom matlib inv
-#' @importFrom zipfR Rbeta
+#' @importFrom pracma inv
+# #' @importFrom zipfR Rbeta
 #'
 #' @return A matrix with 2xS columns. The number of rows can take values
 #' between 1 and S. Each row contains the information of one of species that
@@ -116,7 +116,8 @@ closest_to_exclusion <- function(center, A_int){
       
       r_T_i <- tangent_points_matrix[i,] %>% as.numeric()
       r_T_i_column <- matrix(r_T_i, nrow = dimensions, ncol = 1)
-      N_T_i_colum <- (-1)*matlib::inv(A_int) %*% r_T_i_column %>% as.numeric()
+      # N_T_i_colum <- (-1)*pracma::inv(A_int) %*% r_T_i_column %>% as.numeric()
+      N_T_i_colum <- (-1)*solve(A_int) %*% r_T_i_column %>% as.numeric()
       N_tangent_points_matrix[i,] <- N_T_i_colum
       
     }
