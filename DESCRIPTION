@@ -36,5 +36,4 @@ Imports:
     furrr,
     pracma,
     utils,
-    combinat,
-    deSolve
+    combinat
