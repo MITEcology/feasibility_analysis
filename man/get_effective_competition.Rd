@@ -4,10 +4,10 @@
 \alias{get_effective_competition}
 \title{Get effective competition matrix}
 \usage{
-get_effective_competition(A)
+get_effective_competition(matA)
 }
 \arguments{
-\item{A}{matrix of bipartite network (?)}
+\item{matA}{matrix of bipartite network (?)}
 }
 \value{
 effective competition matrix
@@ -16,6 +16,6 @@ effective competition matrix
 TBA
 }
 \examples{
-TBA
+# TBA
 
 }
