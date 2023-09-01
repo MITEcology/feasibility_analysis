@@ -14,6 +14,8 @@ Authors@R:
             comment = c(ORCID = "0000-0002-0604-7884 ")),
     person("Rudolf", "Rohr", , "rudolf.rohr@unifr.ch", role = c("ctb"),
             comment = c(ORCID = "0000-0002-6440-2696 ")),
+    person("Lucas", "Medeiros", , "lucaspdmedeiros@gmail.com", role = c("ctb"),
+            comment = c(ORCID = "0000-0002-0320-5058 ")),
     person("Chuliang", "Song", , "clsong.ecology@gmail.com", role = c("ctb"),
             comment = c(ORCID = "0000-0001-7490-8626 ")),
     person("Alfonso", "Allen-Perkings", , "alfonso.allen.perkins@gmail.com", role = c("ctb"),
