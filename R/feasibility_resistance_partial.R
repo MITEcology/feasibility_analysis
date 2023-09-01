@@ -1,22 +1,20 @@
-#' Calculate the partial resistance to parameter perturbations
+#' Calculate the partial resistance of a community to parameter perturbations
 #'
-#' @description partial resistance of community S to parameter perturbations
+#' @description partial resistance of community to parameter perturbations. Partial resistance is defined as the closest distance between the intrinsic growth rate vector to any of the vertices of the feasibility domain.
 #'
 #' @param matA the interaction matrix
 #' @param r the intrinsic growth rate
 #' @param norm the norm to embed feasibility domain, either "l1" or "l2"
-#'
-#' @note full resistance is the distance between an intrinsic growth rate vector inside the feasibility domain and a border of \eqn{D(\mathcal{S})}. It can be calculated by the nearest arc length (i.e. L2 norm) from \eqn{r} to a border as: \eqn{d_b = \arccos <r(N^*), r(\mathrm{border})>}; partial resistance is similarly defined as distance between the intrinsic growth rate vector to the vertices of feasibility domain.
 #' 
 #' @importFrom magrittr %>%
 #' @importFrom purrr map_dbl
 #' 
-#' @return a numeric value of the partial resistance
+#' @return a numeric value of the partial (some but not all species) resistance
 #'
 #' @examples
-#' matA <- generate_inte_rand(4, 1, 1, "norm")
-#' r <- matA %*% c(runif(4, 0, 1))
-#' feasibility_resistance_partial(matA, r)
+#' matA <- generate_inte_rand(4, 1, 1, "norm") ## Generate random interaction matrix of nA=4 species
+#' r <- matA %*% c(runif(4, 0, 1)) ## Generate random location of the community inside the feasibility domain
+#' feasibility_resistance_partial(matA, r) ## The max resistance to parameter perturbations before losing nA-1 species.
 #' @export
 #' @seealso feasibility_resistance_full
 feasibility_resistance_partial <- function(matA, r, norm = "l2") {
