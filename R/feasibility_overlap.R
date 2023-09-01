@@ -1,6 +1,6 @@
 #' Calculate the feasibility overlap between two communities
 #'
-#' @description Feasibility overlap between communities \eqn{\mathcal{S}_1} and \eqn{\mathcal{S}_2}
+#' @description Feasibility overlap between two communities of the same dimension.
 #'
 #' @param matA Numeric, an SxS interaction matrix A
 #' @param matB Numeric, an SxS interaction matrix B
@@ -10,13 +10,11 @@
 #'
 #' @return A numeric value of the feasibility overlap between these two communities
 #'
-#' @note interaction matrices need to have the same dimension.
-#'
 #' @export
 #'
 #' @examples
-#' matA <- generate_inte_rand(4, 1, 1, "norm")  ## Generate a random interaction matrix A
-#' matB <- generate_inte_rand(4, 1, 1, "norm")  ## Generate a random interaction matrix B
+#' matA <- generate_inte_rand(4, 1, 1, "norm")  ## Generate a random interaction matrix A of dimension nA=4 species
+#' matB <- generate_inte_rand(4, 1, 1, "norm")  ## Generate a random interaction matrix B of dimension nB=4 species
 #' feasibility_overlap(matA,matB)
 feasibility_overlap <- function(matA, matB, raw = TRUE, nsamples = 3000, nt = 10) {
   num <- nrow(matA)
