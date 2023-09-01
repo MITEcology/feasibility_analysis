@@ -31,6 +31,7 @@ Other contributors:
 \itemize{
   \item Rudolf Rohr \email{rudolf.rohr@unifr.ch} (\href{https://orcid.org/0000-0002-6440-2696 }{ORCID}) [contributor]
   \item Chuliang Song \email{clsong.ecology@gmail.com} (\href{https://orcid.org/0000-0001-7490-8626 }{ORCID}) [contributor]
+  \item Alfonso Allen-Perkings \email{alfonso.allen.perkins@gmail.com} (\href{https://orcid.org/0000-0003-3547-2190 }{ORCID}) [contributor]
 }
 
 }

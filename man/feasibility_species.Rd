@@ -10,6 +10,8 @@ feasibility_species(matA, sp, nt = 30)
 \item{matA}{the interaction matrix of the community}
 
 \item{sp}{the index of the focal species}
+
+\item{nt}{TBA default to 30}
 }
 \value{
 the feasibility value of species \eqn{sp}

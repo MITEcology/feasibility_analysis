@@ -17,7 +17,7 @@ feasibility_resistance_partial(matA, r, norm = "l2")
 a numeric value of the partial resistance
 }
 \description{
-partial resistance of community $\mathcal{S}$ to parameter perturbations
+partial resistance of community S to parameter perturbations
 }
 \note{
 full resistance is the distance between an intrinsic growth rate vector inside the feasibility domain and a border of \eqn{D(\mathcal{S})}. It can be calculated by the nearest arc length (i.e. L2 norm) from \eqn{r} to a border as: \eqn{d_b = \arccos <r(N^*), r(\mathrm{border})>}; partial resistance is similarly defined as distance between the intrinsic growth rate vector to the vertices of feasibility domain.
@@ -28,5 +28,5 @@ r <- matA \%*\% c(runif(4, 0, 1))
 feasibility_resistance_partial(matA, r)
 }
 \seealso{
-\code{\link{feasibility_resistance_full}}
+feasibility_resistance_full
 }
