@@ -55,5 +55,6 @@ citation("feasibilityR")
 TBA
 
 ## To Do:
+- Defensive programing
 - Create tests using testthat
 - Create a vignette
