@@ -1,7 +1,6 @@
 #' Calculate the asymmetry of the feasibility domain of community S with n species
 #'
-#' @description The asymmetry value is defined as the standard deviation of \eqn{\{||v_1||, ||v_2||, \cdots, ||v_n||\}}, where \eqn{v_i} is the \eqn{i}-th column of the interaction matrix, i.e. the \eqn{i}-th vertex of the feasibility domain. Note that \eqn{v_i} is not normalized.
-#' think about a triangle as the feasibility domain. The asymmetry measures the variation in the legth of borders. Each of the borders represent the feasbility of the n-1 communities.
+#' @description The asymmetry value is defined as the standard deviation of \eqn{\{||v_1||, ||v_2||, \cdots, ||v_n||\}}, where \eqn{v_i} is the \eqn{i}-th column of the interaction matrix, i.e. the \eqn{i}-th vertex of the feasibility domain. Note that \eqn{v_i} is not normalized. Think about a triangle as the feasibility domain. The asymmetry measures the variation in the legth of borders. Each of the borders represent the feasbility of the n-1 communities.
 #'
 #' @param matA Numeric, an SxS interaction matrix A
 #'
