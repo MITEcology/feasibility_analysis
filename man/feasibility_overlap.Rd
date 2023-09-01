@@ -21,13 +21,10 @@ feasibility_overlap(matA, matB, raw = TRUE, nsamples = 3000, nt = 10)
 A numeric value of the feasibility overlap between these two communities
 }
 \description{
-Feasibility overlap between communities \eqn{\mathcal{S}_1} and \eqn{\mathcal{S}_2}
-}
-\note{
-interaction matrices need to have the same dimension.
+Feasibility overlap between two communities of the same dimension.
 }
 \examples{
-matA <- generate_inte_rand(4, 1, 1, "norm")  ## Generate a random interaction matrix A
-matB <- generate_inte_rand(4, 1, 1, "norm")  ## Generate a random interaction matrix B
+matA <- generate_inte_rand(4, 1, 1, "norm")  ## Generate a random interaction matrix A of dimension nA=4 species
+matB <- generate_inte_rand(4, 1, 1, "norm")  ## Generate a random interaction matrix B of dimension nB=4 species
 feasibility_overlap(matA,matB)
 }

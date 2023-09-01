@@ -12,15 +12,12 @@ feasibility_partition(matA, nt = 30)
 \item{nt}{Numeric, number of replications to reduce numerical instabilities, default to 30}
 }
 \value{
-a vector \eqn{\{\mathbf{\Omega}\}} of length \eqn{2^{|\mathcal{S}|}} for all \eqn{\mathcal{C} \subseteq \mathcal{S}}, and essentially \eqn{\sum_{\mathcal{C}} \Omega(D(\mathcal{C})) = 1}
+a vector of length 2^n for all possible compositions.
 }
 \description{
-calculate the feasibility partition of all possible compositions \eqn{\mathcal{C} \subseteq \mathcal{S}}
-}
-\note{
-the interaction matrix matA needs to be globally stable in order for a meaningful partition of the parameter space.
+calculate the feasibility partition of all possible 2^n compositions of a pool of n species. The interaction matrix matA needs to be globally stable in order for a meaningful partition of the parameter space. The sum should be close to one.
 }
 \examples{
-matA <- generate_inte_gs(4, 0.8, 1, "norm")  ## Generate a random interaction matrix
-feasibility_partition(matA)
+matA <- generate_inte_gs(4, 1, 1, "norm")  ## Generate a random interaction matrix with nA=4 species
+feasibility_partition(matA) ## Feasibility of each of the 16 possible partitions
 }

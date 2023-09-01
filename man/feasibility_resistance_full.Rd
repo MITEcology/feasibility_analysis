@@ -2,7 +2,7 @@
 % Please edit documentation in R/feasibility_resistance_full.R
 \name{feasibility_resistance_full}
 \alias{feasibility_resistance_full}
-\title{Calculate the full resistance to parameter perturbations}
+\title{Calculate the full resistance of a community to parameter perturbations}
 \usage{
 feasibility_resistance_full(matA, r, norm = "l2", nt = 100, all = FALSE)
 }
@@ -18,18 +18,15 @@ feasibility_resistance_full(matA, r, norm = "l2", nt = 100, all = FALSE)
 \item{all}{whether to return all resistance values from the samples or taking the minimal value as the estimated resistance}
 }
 \value{
-a numeric value of the full resistance
+a numeric value of the full resistance without having species going extinct.
 }
 \description{
-full resistance of community S to parameter perturbations
-}
-\note{
-full resistance is the distance between an intrinsic growth rate vector inside the feasibility domain and a border of \eqn{D(\mathcal{S})}. It can be calculated by the nearest arc length (i.e. L2 norm) from \eqn{r} to a border as: \eqn{d_b = \arccos <r(N^*), r(\mathrm{border})>}; partial resistance is similarly defined as distance between the intrinsic growth rate vector to the vertices of feasibility domain.
+full resistance (all species remain extanct) of a community to parameter perturbations. Full resistance is the distance between an intrinsic growth rate vector inside the feasibility domain and a border of the domain. It can be calculated by the nearest arc length (i.e. L2 norm) from \eqn{r} to a border as: \eqn{d_b = \arccos <r(N^*), r(\mathrm{border})>}.
 }
 \examples{
-matA <- generate_inte_rand(4, 1, 1, "norm")
-r <- matA \%*\% c(runif(4, 0, 1))
-feasibility_resistance_full(matA, r)
+matA <- generate_inte_rand(4, 1, 1, "norm") ## Generate random interaction matrix with nA=4 species
+r <- matA \%*\% c(runif(4, 0, 1)) ## Generate random location inside the feasibility domain
+feasibility_resistance_full(matA, r) ## Extent of parameter perturbations without leading to species extinctions.
 }
 \seealso{
 feasibility_resistance_partial

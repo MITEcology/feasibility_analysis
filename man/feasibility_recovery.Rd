@@ -2,7 +2,7 @@
 % Please edit documentation in R/feasibility_recovery.R
 \name{feasibility_recovery}
 \alias{feasibility_recovery}
-\title{Calculate the recovery to abundance perturbations}
+\title{Calculate the recovery of a community to abundance perturbations}
 \usage{
 feasibility_recovery(matA, r, type)
 }
@@ -14,18 +14,15 @@ feasibility_recovery(matA, r, type)
 \item{type}{the type of recovery rate, either "full" or "part"}
 }
 \value{
-the recovery rate with corresponding type
+the recovery rate to having all species (full) or a subset of species (part)
 }
 \description{
-recovery rate of community \eqn{\mathcal{S}} to abundance perturbations
-}
-\note{
-recovery rate is defined as the real parts of eigenvalues of the Jacobian matrix \eqn{\mathbf{A}\mathrm{diag}(N^{*})}, the largest eigenvalue \eqn{\lambda_1} is full recovery rate, the second smallest eigenvalue \eqn{\lambda_{S-1}} is partial recovery rate. (largest and smallest in terms of absolute values)
+recovery rate of community with n species to random abundance perturbations. Recovery rate is defined as the real parts of eigenvalues of the Jacobian matrix \eqn{\mathbf{A}\mathrm{diag}(N^{*})}, the largest eigenvalue \eqn{\lambda_1} is full recovery rate, the second smallest eigenvalue \eqn{\lambda_{S-1}} is partial recovery rate. (largest and smallest in terms of absolute values)
 }
 \examples{
-matA <- generate_inte_rand(4,1,1,"norm")
-r <- matA \%*\% c(1,2,1,1)
-feasibility_recovery(matA, r, "full")
-feasibility_recovery(matA, r, "part")
+matA <- generate_inte_rand(4,1,1,"norm") ## Generate random interaction matrix with nA=4 species
+rA <- matA \%*\% c(1,2,1,1) ## Generate a random location inside the feasibility domain.
+feasibility_recovery(matA, rA, "full")
+feasibility_recovery(matA, rA, "part")
 
 }
