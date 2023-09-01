@@ -4,6 +4,7 @@
 #'
 #' @param matA the interaction matrix of the community
 #' @param sp the index of the focal species
+#' @param nt TBA default to 30
 #'
 #' @importFrom magrittr %>%
 #'

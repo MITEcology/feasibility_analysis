@@ -1,6 +1,6 @@
 #' Calculate the partial resistance to parameter perturbations
 #'
-#' @description partial resistance of community $\mathcal{S}$ to parameter perturbations
+#' @description partial resistance of community S to parameter perturbations
 #'
 #' @param matA the interaction matrix
 #' @param r the intrinsic growth rate
@@ -18,7 +18,7 @@
 #' r <- matA %*% c(runif(4, 0, 1))
 #' feasibility_resistance_partial(matA, r)
 #' @export
-#' @seealso \code{\link{feasibility_resistance_full}}
+#' @seealso feasibility_resistance_full
 feasibility_resistance_partial <- function(matA, r, norm = "l2") {
   euclidean_distance <- function(a, b) {
     sqrt(sum((a - b)^2))

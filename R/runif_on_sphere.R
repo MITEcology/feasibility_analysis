@@ -7,6 +7,8 @@
 #'
 #' @return A matrix of size n * d, each row is a point on the sphere
 #'
+#' @export
+#'
 #' @examples
 #' runif_on_sphere(20, 4, 1)
 runif_on_sphere <- function(n, d, r = 1) {

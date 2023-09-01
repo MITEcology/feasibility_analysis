@@ -1,6 +1,6 @@
 #' Calculate the full resistance to parameter perturbations
 #'
-#' @description full resistance of community $\mathcal{S}$ to parameter perturbations
+#' @description full resistance of community S to parameter perturbations
 #'
 #' @param matA the interaction matrix
 #' @param r the intrinsic growth rate
@@ -21,7 +21,7 @@
 #' r <- matA %*% c(runif(4, 0, 1))
 #' feasibility_resistance_full(matA, r)
 #' @export
-#' @seealso \code{\link{feasibility_resistance_partial}}
+#' @seealso feasibility_resistance_partial
 feasibility_resistance_full <- function(matA, r, norm = "l2", nt = 100, all = FALSE) {
   simplex_sampling <- function(m, n) {
     r <- list()
