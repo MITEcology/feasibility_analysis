@@ -13,7 +13,7 @@
 #' @importFrom purrr map_dbl
 #' @importFrom utils combn
 #'
-#' @return a numeric value of the full resistance without having species going exrtinct.
+#' @return a numeric value of the full resistance without having species going extinct.
 #'
 #' @examples
 #' matA <- generate_inte_rand(4, 1, 1, "norm") ## Generate random interaction matrix with nA=4 species
