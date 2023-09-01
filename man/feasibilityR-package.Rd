@@ -4,7 +4,7 @@
 \name{feasibilityR-package}
 \alias{feasibilityR}
 \alias{feasibilityR-package}
-\title{feasibilityR: Community ecology feasibility analysis}
+\title{feasibilityR: Community ecology: feasibility analysis}
 \description{
 Analysis of feasibility within the framework of structural stability in ecology.
 }
@@ -23,12 +23,12 @@ Authors:
 \itemize{
   \item Oscar Godoy \email{ogodoy.re@gmail.com} (\href{https://orcid.org/0000-0003-4988-6626 }{ORCID})
   \item Ignasi Bartomeus \email{nacho.bartomeus@gmail.com} (\href{https://orcid.org/0000-0001-7893-4389 }{ORCID})
-  \item Jie Deng \email{jiedeng@mit.edu} (\href{https://orcid.org/0000-0002-0604-7884 }{ORCID})
   \item Chengyi Long \email{cylong@mit.edu} (\href{https://orcid.org/0000-0002-6005-3740 }{ORCID})
 }
 
 Other contributors:
 \itemize{
+  \item Jie Deng \email{jiedeng@mit.edu} (\href{https://orcid.org/0000-0002-0604-7884 }{ORCID}) [contributor]
   \item Rudolf Rohr \email{rudolf.rohr@unifr.ch} (\href{https://orcid.org/0000-0002-6440-2696 }{ORCID}) [contributor]
   \item Chuliang Song \email{clsong.ecology@gmail.com} (\href{https://orcid.org/0000-0001-7490-8626 }{ORCID}) [contributor]
   \item Alfonso Allen-Perkings \email{alfonso.allen.perkins@gmail.com} (\href{https://orcid.org/0000-0003-3547-2190 }{ORCID}) [contributor]
