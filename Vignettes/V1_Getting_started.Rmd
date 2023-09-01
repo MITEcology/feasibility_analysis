@@ -16,13 +16,24 @@ knitr::opts_chunk$set(message = FALSE, warning = FALSE)
 
 **Introduction**
 
-The `feasibilityR` package provides a general interface to estimate the feasibility of a given community given different types of ecological communities and structure of species interactions. The feasibility domain mathematically defined as:
+The `feasibilityR` package provides a general interface to estimate the feasibility of a given community given different types of ecological communities and structure of species interactions. 
+
+Departing from a general Lotka-Volterra (LV) model that describes reasonable well the population dynamics of interacting species, 
+
+$$ \frac{dN_{i}}{dt} =N_{i}\left(r_{i} + \sum_{j=1}^{S} \alpha_{ij}N_{j}\right)$$
+
+the feasibility domain of a given community is mathematically defined as:
 
 INCUDE FORMULA HERE
 
-defines the opportunities for species to coexist. A larger feasibilty domain implies greater opportunities for species to coexist because it the community can accomodate a larger differences in intrinsic growth rate between species compatible with their coexistence. 
+\Omega$ defines the opportunities for species to coexist. A larger feasibility domain implies greater opportunities for species to coexist because the community can accommodate larger differences in intrinsic growth rate between species compatible with their coexistence. 
 
-To calculate the feasibility domain of a given community with S species 
+To calculate the feasibility domain of a given community with S species, we need a matrix that contains the strength and sign of species interactions. Elements in the diagonal will represent intraspecific interactions while interspecific interactions are contained in the off-diagonal elements. Such interaction describes the per-capita effect of species i on j (alphaij) or 
+
+Several matrices can be included obtained from experimental or field data. 
+
+
+
 
 ```{r}
 library(feasibilityR)
