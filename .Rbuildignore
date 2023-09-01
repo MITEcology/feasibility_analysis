@@ -2,3 +2,4 @@
 ^\.Rproj\.user$
 toolbox.R
 demo.R
+^LICENSE\.md$

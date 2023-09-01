@@ -19,7 +19,7 @@ Authors@R:
     person("Alfonso", "Allen-Perkings", , "alfonso.allen.perkins@gmail.com", role = c("ctb"),
             comment = c(ORCID = "0000-0003-3547-2190 ")))
 Description: Analysis of feasibility within the framework of structural stability in ecology.
-License: MIT
+License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
@@ -29,7 +29,10 @@ BugReports: https://github.com/MITEcology/feasibility_analysis/issues
 Depends:
     R (>= 2.10)
 LazyData: true
-Suggests: knitr, rmarkdown
+Suggests: 
+    knitr,
+    rmarkdown,
+    testthat (>= 3.0.0)
 Imports: 
     stats,
     tidyverse,
@@ -40,4 +43,7 @@ Imports:
     furrr,
     pracma,
     utils,
-    combinat
+    combinat,
+    dplyr,
+    magrittr
+Config/testthat/edition: 3
