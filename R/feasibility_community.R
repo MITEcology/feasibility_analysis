@@ -33,6 +33,13 @@ feasibility_community <- function(matA, nt = 30, raw = TRUE) {
   }
   else {
     Sigma <- solve(t(matA) %*% matA)
-    return(replicate(nt, omega(S, Sigma)) %>% mean())
+    Omega_raw <- replicate(nt, omega(S, Sigma)) %>% mean()
+    if (raw == TRUE) {
+      return(Omega_raw)
+    } else if (raw == FALSE) {
+      return(Omega_raw ^ (1 / S))
+    } else {
+      stop("raw must be a logical value")
+    }
   }
 }
