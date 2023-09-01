@@ -1,10 +1,12 @@
-#' Calculate the asymmetry of the feasibility domain of community S
+#' Calculate the asymmetry of the feasibility domain
+#'
+#' @description Calculate the asymmetry of the feasibility domain of community \eqn{\mathcal{S}}.
 #'
 #' @param matA Numeric, an SxS interaction matrix A
 #'
-#' @return Asymmetry or standard deviation of column vectors
+#' @return the asymmetry value
 #'
-#' @note standard deviation of $\{||v_1||, ||v_2||, \cdots, ||v_S||\}$, where $v_i$ is the $i$-th column of the interaction matrix, i.e. the $i$-th vertex of the feasibility domain $D(\mathbf{S})$. Note that $v_i$ is not normalized.
+#' @note the asymmetry value is defined as standard deviation of \eqn{\{||v_1||, ||v_2||, \cdots, ||v_S||\}}, where \eqn{v_i} is the \eqn{i}-th column of the interaction matrix, i.e. the \eqn{i}-th vertex of the feasibility domain \eqn{D(\mathbf{S})}. Note that \eqn{v_i} is not normalized.
 #'
 #' @export
 #'
@@ -15,4 +17,3 @@ feasibility_asymmetry <- function(matA) {
   # standard deviation of all column lengths
   sd(apply(matA, 2, function(x) sqrt(sum(x^2))))
 }
-

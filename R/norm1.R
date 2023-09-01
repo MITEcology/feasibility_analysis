@@ -6,7 +6,7 @@
 #'
 #' @return A vector or a matrix, normalized in the L1 norm
 norm1 <- function(a) {
-  if(is.matrix(a)) {
+  if (is.matrix(a)) {
     a <- apply(a, 2, function(x) x / sum(x))
   } else {
     a <- a / sum(a)

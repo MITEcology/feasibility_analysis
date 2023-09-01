@@ -38,3 +38,4 @@ rsconnect/
 *.RData
 .DS_Store
 .Rproj.user
+*.tmp.R
