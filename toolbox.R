@@ -12,7 +12,7 @@ if (!require(combinat)) {install.packages("combinat"); library(combinat)}
 if (!require(deSolve)) {install.packages("deSolve"); library(deSolve)}
 
 
-# 1. Matrix generation ------
+# 1. Matrix generation. -----
 #Functions to generate different types of matrices to which feasibility can be computed. 
 
 # generate random interaction matrix
@@ -104,18 +104,18 @@ colnames(A_int) <- species_names
 rownames(A_int) <- species_names
 A_int
 
-# 2. Estimations the size and shape of the feasibility domain----
+# 2. Estimations the size and shape of the feasibility domain. ----
 #Functions to estimate the size and the shape of the feasibility domain of a community.
 
-# 3. Comparison of the feasibility domain between communities----
+# 3. Comparison of the feasibility domain between communities. ----
 #Functions to compare the feasibility domain among communities that either differ in the number of species
 #or in the multitrophic structure.
 
-# 4. Estimations of the persistence of individual species and entire communities----
+# 4. Estimations of the persistence of individual species and entire communities. ----
 #Functions that take into account the size and shape of the feasibility domain of a given community
 #to estimate whether individual species can persist as well as the whole community.
 
-# 5. Effects of environmental variability on species persistence. 
+# 5. Effects of environmental variability on species persistence. ---- 
 #Functions that take a probabilistic approach to estimate the role of environmental variability
 #and perturbations to estimate the likelihood in individual species and entire communities to persist 
 

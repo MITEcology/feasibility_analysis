@@ -16,7 +16,13 @@ knitr::opts_chunk$set(message = FALSE, warning = FALSE)
 
 **Introduction**
 
-The `feasibilityR` package provides a general interface to estimate the feasibility of a given community given different types of ecological communities and structure of species interactions...
+The `feasibilityR` package provides a general interface to estimate the feasibility of a given community given different types of ecological communities and structure of species interactions. The feasibility domain mathematically defined as:
+
+INCUDE FORMULA HERE
+
+defines the opportunities for species to coexist. A larger feasibilty domain implies greater opportunities for species to coexist because it the community can accomodate a larger differences in intrinsic growth rate between species compatible with their coexistence. 
+
+To calculate the feasibility domain of a given community with S species 
 
 ```{r}
 library(feasibilityR)
