@@ -1,4 +1,4 @@
-#' Calculate the full resistance to parameter perturbations
+#' Calculate the full resistance of a community to parameter perturbations
 #'
 #' @description full resistance (all species remain extanct) of a community to parameter perturbations. Full resistance is the distance between an intrinsic growth rate vector inside the feasibility domain and a border of the domain. It can be calculated by the nearest arc length (i.e. L2 norm) from \eqn{r} to a border as: \eqn{d_b = \arccos <r(N^*), r(\mathrm{border})>}.
 #'
