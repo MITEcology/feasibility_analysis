@@ -22,11 +22,11 @@ Departing from a general Lotka-Volterra (LV) model that describes reasonable wel
 
 $$ \frac{dN_{i}}{dt} =N_{i}\left(r_{i} + \sum_{j=1}^{S} \alpha_{ij}N_{j}\right)$$
 
-the feasibility domain of a given community is mathematically defined as:
+the feasibility domain of a given community is mathematically defined as the ratio of the following volumes:
 
-INCUDE FORMULA HERE
+$$ \Omega(A) = \frac{vol(D_F(A)\cap B^{S})}{vol(B^{S})}$$
 
-\Omega$ defines the opportunities for species to coexist. A larger feasibility domain implies greater opportunities for species to coexist because the community can accommodate larger differences in intrinsic growth rate between species compatible with their coexistence. 
+$\Omega(A)$ defines the opportunities for species to coexist. A larger feasibility domain implies greater opportunities for species to coexist because the community can accommodate larger differences in intrinsic growth rate between species compatible with their coexistence. 
 
 To calculate the feasibility domain of a given community with S species, we need a matrix that contains the strength and sign of species interactions. Elements in the diagonal will represent intraspecific interactions while interspecific interactions are contained in the off-diagonal elements. Such interaction describes the per-capita effect of species i on j (alphaij) or 
 
