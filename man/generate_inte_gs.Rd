@@ -4,14 +4,7 @@
 \alias{generate_inte_gs}
 \title{Generate random interaction matrix (globally stable)}
 \usage{
-generate_inte_gs(
-  S,
-  sigma,
-  conne = 1,
-  dist = "norm",
-  mu = -0.1 * sigma,
-  trail = 0
-)
+generate_inte_gs(S, sigma, conne = 1, dist = "norm", mu = 0, rep = 1)
 }
 \arguments{
 \item{S}{Numeric, number of species}
@@ -24,16 +17,18 @@ generate_inte_gs(
 
 \item{mu}{Numeric, mean interaction, default to 0}
 
-\item{trail}{Numeric, starting number of trails to generate negative definite matrix, default to 0}
+\item{rep}{Numeric, number of matrices wanted, default to 1}
 }
 \value{
-a globally stable SxS interaction matrix A.
+a single matrix or a list of globally stable SxS interaction matrix A.
 }
 \description{
-Generate a globally stable random interaction matrix A of a community \eqn{\mathcal{S}}
+Generate globally stable random interaction matrices A of a community \eqn{\mathcal{S}}
 }
 \note{
-Note that if one chooses a half-normal distribution, the interaction matrix can be interpreted as a purely competition system. As default, the diagonal values are all set to a_ii = -1 (e.g., self-regulation).
+Note that if one chooses a half-normal distribution, the interaction matrix can be interpreted as a purely competition system.
+
+As default, the diagonal values are all set to a_ii = -1 (e.g., self-regulation).
 }
 \examples{
 matA <- generate_inte_gs(4, 1, 1, "norm")  ## Generate a globally stable random interaction matrix
