@@ -36,16 +36,17 @@ Suggests:
     rmarkdown,
     testthat (>= 3.0.0)
 Imports: 
-    stats,
-    tidyverse,
-    purrr,
-    mvtnorm,
-    mgcv,
-    geometry,
-    furrr,
-    pracma,
-    utils,
     combinat,
     dplyr,
-    magrittr
+    furrr,
+    geometry,
+    magrittr,
+    mgcv,
+    mvtnorm,
+    pracma,
+    purrr,
+    stats,
+    tidyverse,
+    utils,
+    zipfR
 Config/testthat/edition: 3

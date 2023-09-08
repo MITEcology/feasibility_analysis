@@ -20,7 +20,7 @@ generate_inte_gs(S, sigma, conne = 1, dist = "norm", mu = 0, rep = 1)
 \item{rep}{Numeric, number of matrices wanted, default to 1}
 }
 \value{
-a single matrix or a list of globally stable SxS interaction matrix A.
+a single matrix or a list of globally stable SxS interaction matrices A.
 }
 \description{
 Generate globally stable random interaction matrices A of a community \eqn{\mathcal{S}}
