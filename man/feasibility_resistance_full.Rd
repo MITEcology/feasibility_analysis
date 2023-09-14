@@ -4,7 +4,7 @@
 \alias{feasibility_resistance_full}
 \title{Calculate the full resistance of a community to parameter perturbations}
 \usage{
-feasibility_resistance_full(matA, r, norm = "l2", nt = 100, all = FALSE)
+feasibility_resistance_full(matA, r, norm = "l2", nsample = 100, all = FALSE)
 }
 \arguments{
 \item{matA}{the interaction matrix}
@@ -13,7 +13,7 @@ feasibility_resistance_full(matA, r, norm = "l2", nt = 100, all = FALSE)
 
 \item{norm}{the norm to embed feasibility domain, either "l1" or "l2"}
 
-\item{nt}{the number of sampling points on the border of feasibility domain}
+\item{nsample}{the number of sampling points on the border of feasibility domain}
 
 \item{all}{whether to return all resistance values from the samples or taking the minimal value as the estimated resistance}
 }

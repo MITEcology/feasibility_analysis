@@ -16,7 +16,7 @@
 #' matA <- generate_inte_rand(4, 1, 1, "norm")  ## Generate a random interaction matrix A of dimension nA=4 species
 #' matB <- generate_inte_rand(4, 1, 1, "norm")  ## Generate a random interaction matrix B of dimension nB=4 species
 #' feasibility_overlap(matA,matB)
-feasibility_overlap <- function(matA, matB, raw = TRUE, nsamples = 3000, nt = 10) {
+feasibility_overlap <- function(matA, matB, raw = TRUE, nsamples = 200, nt = 10) {
   num <- nrow(matA)
 
   overlap_vertex <- vertex_detection(matA, matB) %>%

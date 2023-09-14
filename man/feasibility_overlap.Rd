@@ -4,7 +4,7 @@
 \alias{feasibility_overlap}
 \title{Calculate the feasibility overlap between two communities}
 \usage{
-feasibility_overlap(matA, matB, raw = TRUE, nsamples = 3000, nt = 10)
+feasibility_overlap(matA, matB, raw = TRUE, nsamples = 200, nt = 10)
 }
 \arguments{
 \item{matA}{Numeric, an SxS interaction matrix A}

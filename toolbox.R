@@ -1,11 +1,9 @@
-# nolint start
 # R package for the feasibility analysis in ecology
 
 if (!require(tidyverse)) {install.packages("tidyverse"); library(tidyverse)}
 if (!require(mvtnorm)) {install.packages("mvtnorm"); library(mvtnorm)}
 if (!require(mgcv)) {install.packages("mgcv"); library(mgcv)}
 if (!require(geometry)) {install.packages("geometry"); library(geometry)}
-if (!require(uniformly)) {install.packages("uniformly"); library(uniformly)}
 if (!require(furrr)) {install.packages("furrr"); library(furrr)}
 if (!require(pracma)) {install.packages("pracma"); library(pracma)}
 if (!require(combinat)) {install.packages("combinat"); library(combinat)}
@@ -716,6 +714,3 @@ lv_pruning <- function(N0, r, K, A, times = seq(0, 200, 0.01),
   which_surv_sp <- as.numeric(which(eq > extinct_tol))
   return(which_surv_sp)
 }
-
-
-# nolint end

@@ -4,14 +4,14 @@
 \alias{feasibility_invasion}
 \title{Calculate feasibility of invasion to a community by a species i}
 \usage{
-feasibility_invasion(matA, inv, nt = 5000)
+feasibility_invasion(matA, inv, nsample = 5000)
 }
 \arguments{
 \item{matA}{Numeric, a nxn interaction matrix A}
 
 \item{inv}{Numeric, index of the invading species}
 
-\item{nt}{Numeric, number of sampling points, default to 5000}
+\item{nsample}{Numeric, number of sampling points, default to 5000}
 }
 \value{
 Feasibility of invasion of species i to a community of n-1 species

@@ -5,7 +5,7 @@
 #' @param matA the interaction matrix
 #' @param r the intrinsic growth rate
 #' @param norm the norm to embed feasibility domain, either "l1" or "l2"
-#' @param nt the number of sampling points on the border of feasibility domain
+#' @param nsample the number of sampling points on the border of feasibility domain
 #' @param all whether to return all resistance values from the samples or taking the minimal value as the estimated resistance
 #'
 #'
@@ -21,7 +21,7 @@
 #' feasibility_resistance_full(matA, r) ## Extent of parameter perturbations without leading to species extinctions.
 #' @export
 #' @seealso feasibility_resistance_partial
-feasibility_resistance_full <- function(matA, r, norm = "l2", nt = 100, all = FALSE) {
+feasibility_resistance_full <- function(matA, r, norm = "l2", nsample = 100, all = FALSE) {
   simplex_sampling <- function(m, n) {
     r <- list()
     for (j in 1:m) {
@@ -43,7 +43,7 @@ feasibility_resistance_full <- function(matA, r, norm = "l2", nt = 100, all = FA
     vertex <- vertices[[i]]
     if (norm == "l1") {
       r <- norm1(r); matA <- norm1(matA)
-      distances_list[[i]] <- 1:nt %>%
+      distances_list[[i]] <- 1:nsample %>%
         map_dbl(function(x) {
           t <- unlist(simplex_sampling(1, nrow(matA) - 1))
           border_point <- c(matA[, vertex] %*% t)
@@ -52,7 +52,7 @@ feasibility_resistance_full <- function(matA, r, norm = "l2", nt = 100, all = FA
     }
     if (norm == "l2") {
       r <- norm2(r); matA <- norm2(matA)
-      distances_list[[i]] <- 1:nt %>%
+      distances_list[[i]] <- 1:nsample %>%
         map_dbl(function(x) {
           t <- unlist(simplex_sampling(1, nrow(matA) - 1))
           border_point <- c(matA[, vertex] %*% t)
