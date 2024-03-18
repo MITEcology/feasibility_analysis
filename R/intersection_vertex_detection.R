@@ -7,6 +7,8 @@
 #' @importFrom pracma nullspace Rank
 #'
 #' @return a list with the extreme points that intersects these cones
+#'
+#' @export
 intersection_vertex_detection <- function(S, M) {
   num <- ncol(S)
   if (num == 2) {

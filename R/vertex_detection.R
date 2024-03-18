@@ -7,6 +7,8 @@
 #' @importFrom dplyr near
 #'
 #' @return a matrix of all the extreme points
+#'
+#' @export
 vertex_detection <- function(A, B) {
   num <- ncol(A)
   inside_vertex <- inside_vertex_detection(A, B)

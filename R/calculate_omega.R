@@ -14,7 +14,6 @@ calculate_omega <- function(vertex, raw = FALSE, nsamples = 1000, method = "conv
   num <- nrow(vertex)
   vertex <- norm2(vertex)
   if (method == "convex_hull") {
-    set.seed(1010)
     vertex <- cbind(
       vertex,
       vertex %*% t(abs(runif_on_sphere(n = nsamples, d = ncol(vertex), r = 1)))
