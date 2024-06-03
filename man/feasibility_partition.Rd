@@ -4,12 +4,14 @@
 \alias{feasibility_partition}
 \title{Calculate the feasibility partition of all possible compositions}
 \usage{
-feasibility_partition(matA, nt = 30)
+feasibility_partition(matA, nt = 30, is.pert = "FALSE")
 }
 \arguments{
 \item{matA}{Numeric, interaction matrix defining the dynamics of the system}
 
 \item{nt}{Numeric, number of replications to reduce numerical instabilities, default to 30}
+
+\item{is.pert}{Logic, whether to add perturbation to the partition boundaries, default to FALSE. This option improves numerical stability}
 }
 \value{
 a vector of length 2^n for all possible compositions.

@@ -34,6 +34,10 @@ feasibility_community <- function(matA, nt = 30, raw = TRUE) {
   else {
     Sigma <- solve(t(matA) %*% matA)
     Omega_raw <- replicate(nt, omega(S, Sigma)) %>% mean()
+    if (is.nan(Omega_raw)) {
+      Sigma <- Sigma + matrix(1e-8, S, S)
+      Omega_raw <- replicate(nt, omega(S, Sigma)) %>% mean()
+    }
     if (raw == TRUE) {
       return(Omega_raw)
     } else if (raw == FALSE) {
