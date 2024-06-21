@@ -33,10 +33,16 @@ feasibility_community <- function(matA, nt = 30, raw = TRUE) {
   }
   else {
     Sigma <- solve(t(matA) %*% matA)
-    Omega_raw <- replicate(nt, omega(S, Sigma)) %>% mean()
+    Omega_raw <- omega(S, Sigma)
+
     if (is.nan(Omega_raw)) {
-      Sigma <- Sigma + matrix(1e-8, S, S)
-      Omega_raw <- replicate(nt, omega(S, Sigma)) %>% mean()
+      message("perturbing interaction matrix in feasibility_community")
+      matAp <- matA + runif(S * S, min = -1e-8, max = 1e-8)
+      Sigma <- solve(t(matAp) %*% matAp)
+      Omega_raw <- omega(S, Sigma)
+    }
+    if (is.nan(Omega_raw)) {
+      stop("NaN generated in feasibility_community")
     }
     if (raw == TRUE) {
       return(Omega_raw)
